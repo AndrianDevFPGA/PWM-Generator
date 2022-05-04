@@ -1,6 +1,7 @@
 /*
   Author : Rakotojaona Nambinina
-  
+  email : Andrianoelisoa.Rakotojaona@gmail.com
+  Description: Program generate PWM signal
 */
 
 `timescale 1ns / 1ps
