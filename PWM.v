@@ -7,48 +7,38 @@
 `timescale 1ns / 1ps
 
 module PWM
-         #(
-          parameter dutyValue = 7,
-          parameter counterValue =3
-          )
           (
            clk,
            rst,
            duty,
-           sig_drv
+           pwm
            );         
-  input clk;
-  input rst;
-  input [dutyValue-1:0] duty;
-  output reg sig_drv;
-  reg [counterValue-1:0] counter;
+   input clk;
+   input rst;
+   input [31:0] duty;
+   output pwm;
   
-  // counter 
+   integer counter;
+  
   always @ (posedge clk)
-  begin
-    if (rst)
     begin
-       sig_drv <=0;
-       counter <= 8'd0;
-    end
-    else
-    begin
-       counter <= counter +1;
+      counter <= counter +1 ;
+      if (rst)
+        begin
+          pwm <=0;
+          counter <=0;
+        end 
+      else
+        begin
+          if (counter < duty)
+            begin
+              pwm <= 1;
+            end 
+          else
+            begin
+              pwm <=0;
+            end 
+        end 
     end 
-  end
-  
- // handle pwm 
- 
- always @ (*)
- begin
-   if (duty > counter)
-   begin
-       sig_drv <= 1'b1;
-   end
-   else
-   begin
-       sig_drv <=1'b0;
-   end 
- end 
          
 endmodule
