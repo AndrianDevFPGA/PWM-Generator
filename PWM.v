@@ -3,6 +3,11 @@
   email : Andrianoelisoa.Rakotojaona@gmail.com
   Description: Program generate PWM signal
 */
+/*
+  Author : Rakotojaona Nambinina
+  email : Andrianoelisoa.Rakotojaona@gmail.com
+  Description: Program generate PWM signal
+*/
 
 `timescale 1ns / 1ps
 
@@ -16,7 +21,7 @@ module PWM
    input clk;
    input rst;
    input [31:0] duty;
-   output pwm;
+   output reg pwm;
   
    integer counter;
   
@@ -37,6 +42,10 @@ module PWM
           else
             begin
               pwm <=0;
+            end 
+          if (counter == 32'd100) 
+            begin
+              counter <=0;
             end 
         end 
     end 
